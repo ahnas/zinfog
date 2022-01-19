@@ -11,6 +11,7 @@ def studentlogin(request):
 
 
 def register(request):
+    
     context={
         "is_studentRegister":True,
     }

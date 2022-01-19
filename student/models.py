@@ -56,3 +56,6 @@ class Student(models.Model):
     phone=models.CharField(max_length=10)
     image = VersatileImageField(blank=True,null=True,upload_to="Profile/",default='default.jpg',ppoi_field='image_ppoi')
     image_ppoi = PPOIField()
+    mark1=models.IntegerField(default=0)
+    mark2=models.IntegerField(default=0)
+    mark3=models.IntegerField(default=0)
