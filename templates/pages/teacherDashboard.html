@@ -15,6 +15,7 @@
         <thead>
           <tr>
             <th>Student</th>
+            <th>DOB</th>
             <th>Photo</th>
             <th>Mark 1</th>
             <th>Mark 2</th>
@@ -25,10 +26,10 @@
           </tr>
         </thead>
         <tbody>
-          
+          {% for student in students%}
           <tr>
-            <td>TEst1</td>
-            <td>TEst1</td>
+            <td>student.name</td>
+            <td>student.dob</td>
             <td>TEst1</td>
             <td>TEst1</td>
             <td>TEst1</td>
@@ -37,12 +38,13 @@
             
             <td>
               <div class="acti" id="{{schedulelist.id}}">
-                <a href="#contact"><i onclick="editt('{{schedulelist.id}}',this)" class="bi bi-pencil-square"></i></a>
-                <a> <i onclick="deletsched('{{schedulelist.id}}')" class="bi bi-trash ms-3 ng-red"></i> </a>
+                <a href="#contact"><i class="bi bi-pencil-square"></i></a>
+                <a> <i class="bi bi-trash ms-3 ng-red"></i> </a>
               </div>
   
             </td>
           </tr>
+          {% endfor %}
           
         </tbody>
        

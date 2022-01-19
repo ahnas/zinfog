@@ -1,6 +1,6 @@
 from pyexpat import model
 from django.db import models
-
+from versatileimagefield.fields import VersatileImageField,PPOIField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
@@ -54,3 +54,5 @@ class Student(models.Model):
     name=models.CharField(max_length=225)
     dob=models.CharField(max_length=50)
     phone=models.CharField(max_length=10)
+    image = VersatileImageField(blank=True,null=True,upload_to="Profile/",default='default.jpg',ppoi_field='image_ppoi')
+    image_ppoi = PPOIField()
