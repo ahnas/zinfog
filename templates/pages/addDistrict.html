@@ -1,0 +1,170 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+
+<div class="container">
+  <h3 style="color: #3f993c;" class="text-center">List <span onclick="formclr()" class="adnew"><a href="#contact"><i class="bi bi-plus-circle mr-2"></i>Add New</a></span> </h3>
+  <div class="row">
+
+
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>District</th>
+          <th>latitude</th>
+          <th>longitude</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for districtlist in districtlist %}
+        <tr>
+          <td>{{districtlist.name}}</td>
+          <td>{{districtlist.latitude}}</td>
+          <td>{{districtlist.longitude}}</td>
+          <td>
+            <div class="acti" id="{{districtlist.id}}">
+              <a href="#contact"><i onclick="editt('{{districtlist.id}}',this)" class="bi bi-pencil-square"></i></a>
+             <a> <i onclick="delet('{{districtlist.id}}')" class="bi bi-trash ms-3 ng-red"></i> </a>
+            </div>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>District</th>
+          <th>latitude</th>
+          <th>longitude</th>
+          <th>Action</th>
+        </tr>
+      </tfoot>
+    </table>
+
+  </div>
+</div>
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
+
+    <h3 id="titedit" class="text-center">Add District</h3>
+
+
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+      <div class="col-xl-9 col-lg-12 mt-4">
+        <form action="" method="POST" class="ajax reload" id="resform">
+          {% csrf_token %}
+          <input type="hidden"  value="0" id="disID" name="id"> 
+          <div class="row mt-3">
+            <div class="col-md-12 form-group">
+
+              {{districtform.name}}
+
+            </div>
+          </div>
+
+
+          <div class="form-group mt-3  text-center">
+            <button type="button" class="btn btn-primar" id="btn-geolocation">Find current location</button>
+          </div>
+
+          <br>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              {{districtform.latitude}}
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              {{districtform.longitude}}
+            </div>
+          </div>
+          <div class="my-3">
+
+          </div>
+          <div class="text-center">
+            <button class="btn btn-danger" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Contact Section -->
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable();
+  });
+</script>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+  function formclr() {
+    $("#titedit").html("Add District");
+    $("#resform").trigger("reset")
+  }
+
+  function delet(ids) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            url: "delet/" + ids,
+            type: "GET",
+            success: function (response) {
+              $('#' + ids).closest('tr').remove()
+            }
+
+          })
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+  }
+
+  function editt(id,thisProp) {
+    $("#titedit").html("Edit District"+ "<span onclick='formclr()' class='adnew'><a href='#contact'><i class='bi bi-plus-circle mr-2'></i>Add New</a></span>");
+    var name = $(thisProp).closest('tr').find("td:eq(0)").html();
+    var latitude = $(thisProp).closest('tr').find("td:eq(1)").html();
+    var longitude = $(thisProp).closest('tr').find("td:eq(2)").html();
+    
+
+    $('#name').val(name)
+    $('#latitude').val(latitude)
+    $('#longitude').val(longitude)
+    $('#disID').val(id)
+    
+
+    
+  }
+
+
+
+</script>
+{% endblock %}

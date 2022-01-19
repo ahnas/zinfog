@@ -1,0 +1,112 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+<div class="container">
+    <h3 style="color: #3f993c;" class="text-center">Student List<span onclick="formclr()" class="adnew"></h3>
+    <div class="row">
+  
+  
+      <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Photo</th>
+            <th>Mark 1</th>
+            <th>Mark 2</th>
+            <th>Mark 3</th>
+            <th>Action</th>
+            <th hidden>schedulelist branch id</th>
+            <th hidden>schedulelist doctor id</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td>TEst1</td>
+            <td>TEst1</td>
+            <td>TEst1</td>
+            <td>TEst1</td>
+            <td>TEst1</td>
+              
+            
+            
+            <td>
+              <div class="acti" id="{{schedulelist.id}}">
+                <a href="#contact"><i onclick="editt('{{schedulelist.id}}',this)" class="bi bi-pencil-square"></i></a>
+                <a> <i onclick="deletsched('{{schedulelist.id}}')" class="bi bi-trash ms-3 ng-red"></i> </a>
+              </div>
+  
+            </td>
+          </tr>
+          
+        </tbody>
+       
+      </table>
+  
+    </div>
+  </div>
+
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
+
+
+      <!-- <h3 class="text-center">Teacher Registration</h3>
+
+      
+
+      <div class="row justify-content-center">
+        <div class="col-lg-6 mt-4">
+          <form id="registerfORM" action="" method="POST" class="" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+           
+           <div class="form-group mt-3">
+            <input type="text" class="form-control" name="name" placeholder="Name">
+          </div>
+
+          <div class="form-group mt-3">
+            <input type="date" class="form-control" name="dob" placeholder="Date">
+          </div>
+          <div class="form-group mt-3"> 
+            <input type="text" class="form-control" name="phone" placeholder="Phone">
+          </div>
+          <div class="form-group mt-3">
+            <input type="text" class="form-control" name="password" placeholder="Password">
+          </div>
+          <div class="form-group mt-3">
+            <input type="file" class="form-control" name="password" placeholder="image">
+          </div>
+        
+           <br>
+            
+            <div class="text-center">
+              <button class="btn btn-danger" id="btnSubmit" type="submit">Login</button>
+            </div>
+
+            {% for message in messages %}
+                    {{message}}
+            {% endfor %}
+
+          </form>
+          
+        </div>
+
+      </div> -->
+
+    </div>
+  </section><!-- End Contact Section -->
+
+
+  
+
+
+
+  
+  {% endblock %}

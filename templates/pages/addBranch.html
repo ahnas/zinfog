@@ -1,0 +1,200 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+
+<div class="container">
+  <h3 style="color: #3f993c;" class="text-center">Branch List <span onclick="formclr()" class="adnew"><a href="#contact"><i
+          class="bi bi-plus-circle mr-2"></i>Add New</a></span> </h3>
+  <div class="row">
+
+
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>title</th>
+          <th>phone</th>
+          <th>location</th>
+          <th>latitude</th>
+          <th>longitude</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for branchlist in branchlist %}
+        <tr>
+          <td>{{branchlist.name}}</td>
+          <td>{{branchlist.title}}</td>
+          <td>{{branchlist.phone}}</td>
+          <td>{{branchlist.location}}</td>
+          <td>{{branchlist.latitude}}</td>
+          <td>{{branchlist.longitude}}</td>
+          <td>
+            <div class="acti" id="{{branchlist.id}}">
+              <a href="#contact"><i onclick="editt('{{branchlist.id}}',this)" class="bi bi-pencil-square"></i></a>
+              <a> <i onclick="deletbranch('{{branchlist.id}}')" class="bi bi-trash ms-3 ng-red"></i> </a>
+            </div>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>name</th>
+          <th>title</th>
+          <th>phone</th>
+          <th>location</th>
+          <th>latitude</th>
+          <th>longitude</th>
+          <th>Action</th>
+        </tr>
+      </tfoot>
+    </table>
+
+  </div>
+</div>
+
+
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
+
+
+    <h3 id="titedit" class="text-center">Add Branch</h3>
+
+
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+      <div class="col-xl-9 col-lg-12 mt-4">
+        <form  action="" method="POST" class="ajax reload" id="resform">
+          {% csrf_token %}
+          <input type="hidden" value="0" id="disID" name="id">
+          <div class="row mt-3">
+            <div class="col-md-6 form-group">
+              {{branchform.name}}
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              {{branchform.title}}
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6 form-group">
+              {{branchform.location}}
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              {{branchform.phone}}
+            </div>
+          </div>
+
+          <div class="form-group mt-3  text-center">
+            <button type="button" class="btn btn-primar" id="btn-geolocation">Find my location</button>
+          </div>
+
+          <br>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              {{branchform.latitude}}
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              {{branchform.longitude}}
+            </div>
+          </div>
+          <div class="my-3">
+
+          </div>
+          <div class="text-center">
+            <button class="btn btn-danger" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Contact Section -->
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable();
+  });
+</script>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+  function formclr() {
+    $("#titedit").html("Add Branch");
+    $("#resform").trigger("reset")
+  }
+
+  function deletbranch(ids) {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            url: "/official/deletbranch/"+ids,
+            type: "GET",
+            success: function (response) {
+              $('#' + ids).closest('tr').remove()
+            }
+
+          })
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+  }
+
+  function editt(id, thisProp) {
+    $("#titedit").html("Edit Branch" + "<span onclick='formclr()' class='adnew'><a href='#contact'><i class='bi bi-plus-circle mr-2'></i>Add New</a></span>");
+    var name = $(thisProp).closest('tr').find("td:eq(0)").html();
+    var title = $(thisProp).closest('tr').find("td:eq(1)").html();
+    var phone = $(thisProp).closest('tr').find("td:eq(2)").html();
+    var location = $(thisProp).closest('tr').find("td:eq(3)").html();
+    var latitude = $(thisProp).closest('tr').find("td:eq(4)").html();
+    var longitude = $(thisProp).closest('tr').find("td:eq(5)").html();
+
+
+    $('#name').val(name)
+    $('#title').val(title)
+    $('#phone').val(phone)
+    $('#location').val(location)
+    $('#latitude').val(latitude)
+    $('#longitude').val(longitude)
+
+    $('#disID').val(id)
+
+    
+
+
+  }
+
+
+
+</script>
+{% endblock %}
