@@ -2,6 +2,8 @@ from pyexpat import model
 from django.db import models
 from versatileimagefield.fields import VersatileImageField,PPOIField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
+from django import forms
+from django.db.models.fields import DateField, SlugField
 # Create your models here.
 
 
@@ -50,12 +52,15 @@ class Teacher(models.Model):
     phone=models.CharField(max_length=10)
 
 class Student(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    
     name=models.CharField(max_length=225)
-    dob=models.CharField(max_length=50)
-    phone=models.CharField(max_length=10)
+    dob=DateField()
+    phone=models.CharField(max_length=30)
     image = VersatileImageField(blank=True,null=True,upload_to="Profile/",ppoi_field='image_ppoi')
     image_ppoi = PPOIField()
-    mark1=models.IntegerField(default=0)
-    mark2=models.IntegerField(default=0)
-    mark3=models.IntegerField(default=0)
+    mark1=models.IntegerField(default=0,blank=True,null=True)
+    mark2=models.IntegerField(default=0,blank=True,null=True)
+    mark3=models.IntegerField(default=0,blank=True,null=True)
+
+    def __str__(self):
+        return str(self.name)

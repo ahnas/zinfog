@@ -3,6 +3,7 @@
 {% block content %}
 
 
+<<<<<<< Updated upstream
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
     <div class="container">
@@ -19,6 +20,24 @@
            
            <div class="form-group mt-3">
             <input type="text" class="form-control" name="username" placeholder="Email">
+=======
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
+    <h3 class="text-center">Student Register</h3>
+
+
+
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6 mt-4">
+        <form id="loginfORM" action="" method="POST" class="ajax reload" enctype="multipart/form-data">
+          {% csrf_token %}
+
+
+          <div class="form-group mt-3">
+            {{regform.name}}
+>>>>>>> Stashed changes
           </div>
           <div class="form-group mt-3">
             <input type="text" class="form-control" name="password" placeholder="Password">
@@ -27,41 +46,45 @@
             <input type="text" class="form-control" name="name" placeholder="Name">
           </div>
           <div class="form-group mt-3">
-            <input type="date" class="form-control" name="dob" placeholder="dob">
+            {{regform.dob}}
           </div>
 
           <div class="form-group mt-3">
             <input type="text" class="form-control" name="phone" placeholder="Phone">
           </div>
           <div class="form-group mt-3">
-            Photo: 
+            Photo:
           </div>
           <div class="form-group mt-3">
+
             <input type="file" class="form-control" name="photo" placeholder="Photo">
-          </div>
-        
-        
-           <br>
+=======
             
-            <div class="text-center">
-              <button class="btn btn-danger" id="btnSubmit" type="submit">Register</button>
-            </div>
 
-            <a class="nav-link text-center" href="{% url 'student:studentlogin' %}">or Login?</a>
+          </div>
 
-          </form>
-          
-        </div>
+
+          <br>
+
+          <div class="text-center">
+            <button class="btn btn-danger" id="btnSubmit" type="submit">Register</button>
+          </div>
+
+          <a class="nav-link text-center" href="{% url 'student:studentlogin' %}">or Login?</a>
+
+        </form>
 
       </div>
 
     </div>
-  </section><!-- End Contact Section -->
+
+  </div>
+</section><!-- End Contact Section -->
+
+  <div class="errorlist" ></div>
 
 
-  
 
 
 
-  
-  {% endblock %}
+{% endblock %}

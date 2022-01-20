@@ -46,7 +46,9 @@ button:hover, a:hover {
 <h2 style="text-align:center">User Profile Card</h2>
 
 <div class="card">
-  <img src="{{student.image.crop.50x50}}" alt="John" style="width:100%">
+  {% if student.image %}
+              <img src="{{student.image.crop.50x50}}">
+  {% endif %}
   <h1>{{student.name}}</h1>
   <p class="title"></p>
   <form method="POST">

@@ -84,6 +84,7 @@ def studentedit(request,id):
         student.save()
         success="Record Updated"
         context["success"]=success
+        return redirect('teacher:dashboard')
     
     return render(request,'pages/studentEdit.html',context)
 
