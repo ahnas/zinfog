@@ -62,11 +62,8 @@
       <nav id="navbar" class="navbar"> 
         <ul>
           {% if user.is_authenticated %}
-          <li><a class="nav-link scrollto {% if is_addDistrict %}active{% endif %}" >Add District</a></li>
-          <li><a class="nav-link scrollto {% if is_addBranch %}active{% endif %}" >dd Branch</a></li>
-          <li><a class="nav-link scrollto {% if is_addDoctor %}active{% endif %}" >dd Doctor</a></li>
-          <li><a class="nav-link scrollto {% if is_addSchedule %}active{% endif %}" >Add Schedule</a></li>
-          <li><a class="nav-link scrollto" href="#">Logout</a></li>
+          
+          <li><a class="nav-link scrollto" href="{% url 'teacher:logout' %}">Logout</a></li>
           {% else %}
           {% if is_studentlogin %}
           <li><a class="nav-link scrollto" href="{% url 'teacher:login' %}">Admin Login</a></li>
