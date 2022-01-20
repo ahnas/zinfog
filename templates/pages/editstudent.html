@@ -47,15 +47,18 @@ button:hover, a:hover {
   {% if student.image %}
               <img src="{{student.image.crop.50x50}}">
   {% endif %}
-  <p>Name : {{student.name}}</p>
-  <p>Phone : {{student.phone}}</p>
-  <p>DOB : {{student.dob}}</p>
+  <form method="POST">
+    {% csrf_token %}
+  <p>Name : <input type="text" value="{{student.name}}" name="name" ></p>
+  <p>Phone : <input type="text" value="{{student.phone}}" name="phone" ></p>
+  <p>DOB : <input type="date" value="{{student.dob}}" name="dob" ></p>
   <p>Mark 1 : {{student.mark1}}</p>
   <p>Mark 2 : {{student.mark2}}</p>
   <p>Mark 3 : {{student.mark3}}</p>
+  <p><button type="submit">Save</button></p>
+  </form>
   
  
-  <p><a class="btn btn-danger" href="{%url 'student:editstudent' %}">Edit</a></p>
   
 </div>
 

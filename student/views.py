@@ -56,6 +56,29 @@ def studentDashboard(request):
     }
     return render(request,'pages/studentView.html',context)
 
+
+@login_required(login_url='student:login')
+def editstudent(request):
+    
+
+    try:
+        student = Student.objects.get(user=request.user)
+    except Student.DoesNotExist:
+        student = None
+    context={
+        "student":student
+    }
+    if request.POST:
+        name=request.POST['name']
+        phone=request.POST['phone']
+        dob=request.POST['dob']
+        student = Student.objects.get(user=request.user)
+        student.name=name
+        student.phone=phone
+        student.dob=dob
+        student.save()
+        return redirect('student:studentDashboard')
+    return render(request,'pages/editstudent.html',context)
 def register(request):
     if request.POST:
         email = request.POST['username']
