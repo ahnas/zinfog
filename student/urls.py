@@ -10,5 +10,5 @@ app_name='student'
 urlpatterns = [ 
     path('', studentlogin,name="studentlogin"), 
     path('register', register,name="register"), 
-    path('studentDashboard/<int:id>', studentDashboard,name="studentDashboard"), 
+    path('studentDashboard', studentDashboard,name="studentDashboard"), 
 ]

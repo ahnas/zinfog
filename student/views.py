@@ -26,14 +26,13 @@ def studentlogin(request):
         
         if user:
             auth_login(request,user)
-            return redirect('student:studentDashboard',id = 12)
+            return redirect('student:studentDashboard')
         else:
-            print("error")
+            print("invalid Username")
         context={
             
         "is_studentlogin":True,
         "error":"Invalid User name or password",
-        
         }
 
     context={
@@ -44,15 +43,17 @@ def studentlogin(request):
 
 
 @login_required(login_url='student:login')
-def studentDashboard(request,id):
-    student=Student.objects.get(id=id)
+def studentDashboard(request):
+    try:
+        student = Student.objects.get(user=request.user)
+    except Student.DoesNotExist:
+        student = None
     context={
         "student":student
     }
     return render(request,'pages/studentView.html',context)
 
 def register(request):
-    
     if request.POST:
         email = request.POST['username']
         password = request.POST['password']

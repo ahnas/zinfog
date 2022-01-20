@@ -52,7 +52,7 @@ class Teacher(models.Model):
     phone=models.CharField(max_length=10)
 
 class Student(models.Model):
-    
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=225)
     dob=DateField()
     phone=models.CharField(max_length=30)
