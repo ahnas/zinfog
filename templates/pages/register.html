@@ -13,17 +13,19 @@
 
       <div class="row justify-content-center">
         <div class="col-lg-6 mt-4">
-          <form id="loginfORM" action="" method="POST" class="">
+          <form id="loginfORM" action="" method="POST" class="" enctype="multipart/form-data">
             {% csrf_token %}
 
            
            <div class="form-group mt-3">
-            <input type="text" class="form-control" name="username" placeholder="Username">
+            <input type="text" class="form-control" name="username" placeholder="Email">
           </div>
           <div class="form-group mt-3">
             <input type="text" class="form-control" name="password" placeholder="Password">
           </div>
-
+          <div class="form-group mt-3">
+            <input type="text" class="form-control" name="name" placeholder="Name">
+          </div>
           <div class="form-group mt-3">
             <input type="date" class="form-control" name="dob" placeholder="dob">
           </div>
@@ -35,7 +37,7 @@
             Photo:
           </div>
           <div class="form-group mt-3">
-            <input type="file" class="form-control" name="Photo" placeholder="Photo">
+            <input type="file" class="form-control" name="photo" placeholder="Photo">
           </div>
         
         
