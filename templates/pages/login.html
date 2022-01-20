@@ -3,54 +3,64 @@
 {% block content %}
 
 
-  <!-- ======= Contact Section ======= -->
-  <section id="contact" class="contact">
-    <div class="container">
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
 
-      {% if is_studentlogin %}
-      <h3 class="text-center">Student Login</h3>
-      {% else %}
-      <h3 class="text-center">Teacher Login</h3>
+    {% if is_studentlogin %}
+    <h3 class="text-center">Student Login</h3>
+    {% else %}
+    <h3 class="text-center">Teacher Login</h3>
 
-      {% endif %}
+    {% endif %}
 
-      
 
-      <div class="row justify-content-center">
-        <div class="col-lg-6 mt-4">
-          <form id="loginfORM" action="" method="POST" class="">
-            {% csrf_token %}
 
-           
-           <div class="form-group mt-3">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 mt-4">
+        <form id="loginfORM" action="" method="POST" class="">
+          {% csrf_token %}
+
+
+          <div class="form-group mt-3">
             <input type="text" class="form-control" name="username" placeholder="Username">
           </div>
           <div class="form-group mt-3">
-            <input type="text" class="form-control" name="password"placeholder="Password">
+            <input type="text" class="form-control" name="password" placeholder="Password">
           </div>
 
-          <p>{{error}}</p>
-           <br>
-            
-            <div class="text-center">
-              <button class="btn btn-danger" id="btnSubmit" type="submit">Login</button>
-            </div>
 
-            <a class="nav-link text-center" href="{% url 'student:register' %}">or Regiter</a>
+          <br>
 
-          </form>
+          <div class="text-center">
+            <button class="btn btn-danger" id="btnSubmit" type="submit">Login</button>
+          </div>
+
+
+
           
-        </div>
+
+          {% if is_studentlogin %}
+          <a class="nav-link text-center" href="{% url 'student:register' %}">or Regiter</a>
+          {% else %}
+          <a class="nav-link text-center" href="{% url 'teacher:register' %}">or Regiter</a>
+
+          {% endif %}
+
+
+        </form>
 
       </div>
 
     </div>
-  </section><!-- End Contact Section -->
+
+  </div>
+</section><!-- End Contact Section -->
 
 
-  
 
 
 
-  
-  {% endblock %}
+
+
+{% endblock %}

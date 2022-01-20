@@ -8,7 +8,8 @@ from student.models import Teacher, User
 from student.views import studentlogin  
 from .models import *
 from student.models import *
-
+import json
+from django.http import HttpResponse
 
 
 
@@ -53,7 +54,12 @@ def register(request):
         teacher.department=department
         teacher.phone=Phone
         teacher.save()
-        return redirect('/teacher')
+        response_data = {
+                "status" : "true",
+                "title" : "Successfully Registered",
+                
+            }
+        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
 
 
     context={
