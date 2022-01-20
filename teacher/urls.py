@@ -11,4 +11,5 @@ urlpatterns = [
     path('', login,name="login"), 
     path('register', register,name="register"),
     path('dashboard', adminDashboard,name="dashboard"),
+    path('studentedit/<int:id>', studentedit,name="studentedit"),
 ]

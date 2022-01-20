@@ -61,3 +61,21 @@ def adminDashboard(request):
         "students":students
     }
     return render(request,'pages/teacherDashboard.html',context)
+
+
+def studentedit(request,id):
+    student=Student.objects.get(id=id)
+    context={
+        "student":student,
+        "is_studentedit":True
+    }
+    if request.POST:
+        student=Student.objects.get(id=id)
+        student.mark1=request.POST["m1"]
+        student.mark2=request.POST["m2"]
+        student.mark3=request.POST["m3"]
+        student.save()
+        success="Record Updated"
+        context["success"]=success
+    
+    return render(request,'pages/studentEdit.html',context)

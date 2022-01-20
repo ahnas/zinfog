@@ -26,19 +26,19 @@
           </tr>
         </thead>
         <tbody>
-          {% for student in students%}
+          {% for student in students %}
           <tr>
-            <td>student.name</td>
-            <td>student.dob</td>
+            <td>{{student.name}}</td>
+            <td>{{student.dob}}</td>
             <td><img src="{{student.image.crop.50x50}}"></td>
-            <td>student.mark1</td>
-            <td>student.mark2</td>
-            <td>student.mark3</td>
+            <td>{{student.mark1}}</td>
+            <td>{{student.mark2}}</td>
+            <td>{{student.mark3}}</td>
             
             
             <td>
               <div class="acti">
-                <a href="{}"><i class="bi bi-pencil-square"></i></a>
+                <a href="{% url 'teacher:studentedit' student.id%}"><i class="bi bi-pencil-square"></i></a>
                 <a> <i class="bi bi-trash ms-3 ng-red"></i> </a>
               </div>
   
