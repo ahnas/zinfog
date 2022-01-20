@@ -1,3 +1,4 @@
+from distutils.log import error
 from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, get_user_model,login  as auth_login,logout as auth_logout
@@ -7,6 +8,10 @@ from student.models import Teacher, User
 from student.views import studentlogin  
 from .models import *
 from student.models import *
+
+
+
+
 # Create your views here.
 def login(request):
     if request.POST:
@@ -16,6 +21,8 @@ def login(request):
         if user:
             auth_login(request,user)
             return redirect('teacher:dashboard')
+        else:
+            print("error")
         context={
         "is_teacherlogin":True,
         "error":"Invalid User name or password",
@@ -79,3 +86,8 @@ def studentedit(request,id):
         context["success"]=success
     
     return render(request,'pages/studentEdit.html',context)
+
+
+def logout(request):
+    auth_logout(request)
+    return redirect('teacher:login')
