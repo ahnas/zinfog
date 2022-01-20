@@ -10,6 +10,7 @@ from .models import *
 from student.models import *
 import json
 from django.http import HttpResponse
+from django.contrib import messages
 
 
 
@@ -24,6 +25,7 @@ def login(request):
             return redirect('teacher:dashboard')
         else:
             print("error")
+            messages.error(request, 'invalid Username or Password.')
         context={
         "is_teacherlogin":True,
         "error":"Invalid User name or password",

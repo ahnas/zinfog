@@ -29,7 +29,13 @@
             <input type="text" class="form-control" name="password" placeholder="Password">
           </div>
 
-          <p class="error">{{error}}</p>
+          {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.error }}" {% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
 
           <br>
 
@@ -39,7 +45,7 @@
 
 
 
-          
+
 
           {% if is_studentlogin %}
           <a class="nav-link text-center" href="{% url 'student:register' %}">or Regiter</a>

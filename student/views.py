@@ -13,6 +13,8 @@ from student.models import Teacher, User
 from student.forms import StudentRegForm
 import json
 from django.http import HttpResponse
+from django.contrib import messages
+
 
 
 
@@ -28,7 +30,8 @@ def studentlogin(request):
             auth_login(request,user)
             return redirect('student:studentDashboard')
         else:
-            print("invalid Username")
+            messages.error(request, 'invalid Username or Password.')
+            print("invalid Username Password")
         context={
             
         "is_studentlogin":True,
